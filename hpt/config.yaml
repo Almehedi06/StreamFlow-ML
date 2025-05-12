@@ -1,0 +1,49 @@
+paths:
+  train: data/camel_train.csv
+  dev: data/camel_dev.csv
+  results: results/
+
+features:
+  - dayl
+  - prcp
+  - srad
+  - tmax
+  - tmin
+  - vp
+
+target: streamflow
+
+training_params:
+  lookback: 20
+  dropout: 0.2
+  batch_size: 128
+  learning_rate: 0.001
+  optimizer: adam
+  loss_function: mse
+  epochs: 50
+  activation: relu
+
+training_space:
+  lookback: [1, 2, 3, 5, 10, 15, 20, 30]
+  dropout: [0.2, 0.3, 0.4, 0.5]
+  batch_size: [64, 128]
+  learning_rate: [0.0001, 0.0005, 0.001, 0.01]
+  optimizer: [adam, rmsprop]
+  loss_function: [mse, mae, huber]
+  epochs: [50, 100, 200]
+  activation: [relu, tanh]
+
+architectural_params:
+  lstm:
+    num_layers: [1, 2, 3]
+    neurons: [32, 64, 128]
+  bilstm:
+    num_layers: [1, 2, 3]
+    neurons: [32, 64, 128]
+  conv1d:
+    num_layers: [1, 2, 3]
+    filters: [32, 64, 128]
+    kernel_size: [3, 5, 7]
+  gru:
+    num_layers: [1, 2, 3]
+    neurons: [32, 64, 128]

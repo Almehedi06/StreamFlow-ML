@@ -1,0 +1,57 @@
+features:
+  - dayl
+  - prcp
+  - srad
+  - tmax
+  - tmin
+  - vp
+
+target: streamflow
+
+lstm:
+  lookback: 20
+  dropout: 0.2
+  batch_size: 128
+  learning_rate: 0.001
+  optimizer: adam
+  loss_function: mse
+  epochs: 50
+  activation: relu
+  num_layers: 2
+  neurons: 64
+
+bilstm:
+  lookback: 20
+  dropout: 0.2
+  batch_size: 128
+  learning_rate: 0.001
+  optimizer: adam
+  loss_function: mse
+  epochs: 50
+  activation: relu
+  num_layers: 2
+  neurons: 64
+
+gru:
+  lookback: 20
+  dropout: 0.2
+  batch_size: 128
+  learning_rate: 0.001
+  optimizer: adam
+  loss_function: mse
+  epochs: 50
+  activation: relu
+  num_layers: 2
+  neurons: 64
+
+conv1d:
+  lookback: 20
+  dropout: 0.2
+  batch_size: 128
+  learning_rate: 0.001
+  loss_function: mse
+  epochs: 50
+  activation: relu
+  num_layers: 2
+  filters: 64
+  kernel_size: 3
