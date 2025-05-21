@@ -94,4 +94,4 @@ Developed and maintained by [@Almehedi06](https://github.com/Almehedi06)
 
 ## 📜 License
 
-MIT License (add `LICENSE` file if applicable)
+MIT License
