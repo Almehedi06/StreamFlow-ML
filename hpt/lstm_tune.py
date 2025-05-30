@@ -1,20 +1,17 @@
-# lstm_tune.py
-
 import os
 import time
 import yaml
 import pandas as pd
 import numpy as np
+import tensorflow as tf
+import random
 from itertools import product
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.optimizers import Adam, RMSprop
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_squared_error
-from utils.data_loader import load_data
 from utils.evaluation import calculate_nse
-import random
 
 # --- SET GLOBAL SEEDS FOR REPRODUCIBILITY ---
 SEED = 42
@@ -146,16 +143,3 @@ def run_training_param_tuning(train_df, dev_df, batch_ids, tune_param, tune_valu
     start_seq = batch_ids[0]
     batch_size = len(batch_ids)
     results_df.to_csv(os.path.join(RESULTS_DIR, f"LSTM_HPT_{tune_param}_batch_{start_seq}_to_{start_seq + batch_size - 1}.csv"), index=False)
-
-if __name__ == "__main__":
-    train_df = pd.read_csv(DATA_PATH_TRAIN)
-    dev_df = pd.read_csv(DATA_PATH_DEV)
-
-    start_seq = 1
-    batch_size = 5
-    gauge_seq_ids = train_df["gauge_seq_id"].unique()
-    batch_ids = gauge_seq_ids[start_seq - 1:start_seq - 1 + batch_size]
-
-    run_architectural_tuning(train_df, dev_df, batch_ids)
-    for param in TRAINING_PARAMS:
-        run_training_param_tuning(train_df, dev_df, batch_ids, param, config["training_space"][param])

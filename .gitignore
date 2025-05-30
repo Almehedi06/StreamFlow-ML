@@ -1,0 +1,10 @@
+data/
+results/
+*.csv
+*.h5
+*.npz
+*.zip
+*.tif
+*.pt
+*.pth
+.DS_Store

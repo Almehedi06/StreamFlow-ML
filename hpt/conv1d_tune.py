@@ -1,20 +1,17 @@
-# conv1d_tune.py
-
 import os
 import time
 import yaml
 import numpy as np
 import pandas as pd
+import random
+import tensorflow as tf
 from itertools import product
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv1D, Dense, Dropout, Flatten
 from tensorflow.keras.optimizers import Adam, RMSprop
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_squared_error
 from utils.evaluation import calculate_nse
-import random
-import tensorflow as tf
 
 # --- SET GLOBAL SEEDS FOR REPRODUCIBILITY ---
 SEED = 42
@@ -44,7 +41,6 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 def build_conv1d_model(input_shape, num_layers, filters, kernel_size):
     model = Sequential()
     for i in range(num_layers):
-        return_seq = True if i < num_layers - 1 else False
         model.add(Conv1D(filters=filters, kernel_size=kernel_size, activation=TRAINING_PARAMS["activation"], padding='same', input_shape=input_shape))
         model.add(Dropout(TRAINING_PARAMS["dropout"]))
     model.add(Flatten())
@@ -105,7 +101,7 @@ def run_architectural_tuning(train_df, dev_df, batch_ids):
     results_df = pd.DataFrame(results)
     start_seq = batch_ids[0]
     batch_size = len(batch_ids)
-    results_df.to_csv(os.path.join(RESULTS_DIR, f"Conv1d_HPT_results_batch_{start_seq}_to_{start_seq + batch_size - 1}.csv"), index=False)
+    results_df.to_csv(os.path.join(RESULTS_DIR, f"conv1d_HPT_results_batch_{start_seq}_to_{start_seq + batch_size - 1}.csv"), index=False)
 
 def run_training_param_tuning(train_df, dev_df, batch_ids, tune_param, tune_values):
     results = []
@@ -150,4 +146,4 @@ def run_training_param_tuning(train_df, dev_df, batch_ids, tune_param, tune_valu
     results_df = pd.DataFrame(results)
     start_seq = batch_ids[0]
     batch_size = len(batch_ids)
-    results_df.to_csv(os.path.join(RESULTS_DIR, f"Conv1d_HPT_{tune_param}_batch_{start_seq}_to_{start_seq + batch_size - 1}.csv"), index=False)
+    results_df.to_csv(os.path.join(RESULTS_DIR, f"conv1d_HPT_{tune_param}_batch_{start_seq}_to_{start_seq + batch_size - 1}.csv"), index=False)

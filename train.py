@@ -33,7 +33,7 @@ def train_model(df, model_name, model_config, features, target, gauge_ids):
     all_metrics = []
 
     for gauge_id in gauge_ids:
-        print(f"\n📊 Training {model_name.upper()} for Gauge Seq ID: {gauge_id}")
+        print(f"\n Training {model_name.upper()} for Gauge Seq ID: {gauge_id}")
         site_data = df[df['gauge_seq_id'] == gauge_id]
         split_index = int(len(site_data) * 0.8)
 
@@ -62,12 +62,12 @@ def train_model(df, model_name, model_config, features, target, gauge_ids):
         metrics = {"gauge_seq_id": gauge_id, **calculate_metrics(y_test, y_pred)}
         all_metrics.append(metrics)
 
-        # ✅ Save model
+        # Save model
         model_filename = f"saved_models/{model_name}_{gauge_id}.h5"
         model.save(model_filename)
-        print(f"✅ Saved model: {model_filename}")
+        print(f" Saved model: {model_filename}")
 
-        print(f"🎉 Done Gauge {gauge_id}: R²={metrics['r2']:.3f}, NSE={metrics['nse']:.3f}")
+        print(f" Done Gauge {gauge_id}: R²={metrics['r2']:.3f}, NSE={metrics['nse']:.3f}")
 
     return pd.DataFrame(all_metrics)
 
@@ -93,4 +93,4 @@ if __name__ == "__main__":
     results = train_model(df, args.model, model_config, features, target, batch_ids)
     output_csv = f"results/metrics_{args.model}_seq_{args.start_seq}_to_{args.start_seq + args.batch_size - 1}.csv"
     results.to_csv(output_csv, index=False)
-    print(f"📄 Metrics saved to: {output_csv}")
+    print(f" Metrics saved to: {output_csv}")
