@@ -1,13 +1,15 @@
-# Dockerfile
-FROM python:3.10-slim
+# Use base image with Python & TensorFlow
+FROM python:3.10
 
+# Set working directory
 WORKDIR /app
 
-COPY . .
+# Copy all project files
+COPY . /app
 
+# Install dependencies
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-EXPOSE 8888
-
-CMD ["bash"]
+# Default command (can override in `docker run`)
+CMD ["python", "train.py"]
