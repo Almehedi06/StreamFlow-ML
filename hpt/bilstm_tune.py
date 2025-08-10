@@ -100,7 +100,7 @@ def run_architectural_tuning(train_df, dev_df, batch_ids):
     results_df = pd.DataFrame(results)
     start_seq = batch_ids[0]
     batch_size = len(batch_ids)
-    results_df.to_csv(os.path.join(RESULTS_DIR, f"bilstm_HPT_results_batch_{start_seq}_to_{start_seq + batch_size - 1}.csv"), index=False)
+    results_df.to_csv(os.path.join(RESULTS_DIR, f"BILSTM_HPT_results_batch_{start_seq}_to_{start_seq + batch_size - 1}.csv"), index=False)
 
 def run_training_param_tuning(train_df, dev_df, batch_ids, param, values):
     results = []
@@ -153,4 +153,4 @@ def run_training_param_tuning(train_df, dev_df, batch_ids, param, values):
     results_df = pd.DataFrame(results)
     start_seq = batch_ids[0]
     batch_size = len(batch_ids)
-    results_df.to_csv(os.path.join(RESULTS_DIR, f"bilstm_training_hpt_{param}_batch_{start_seq}_to_{start_seq + batch_size - 1}.csv"), index=False)
+    results_df.to_csv(os.path.join(RESULTS_DIR, f"BILSTM_HPT_{param}_batch_{start_seq}_to_{start_seq + batch_size - 1}.csv"), index=False)
