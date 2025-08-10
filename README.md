@@ -73,6 +73,7 @@ This runs your HPT strategy defined in the `hpt/` folder.
 
 - LSTM
 - BiLSTM
+- ConvID
 - GRU  
 (Architectures are located in `models/`)
 
