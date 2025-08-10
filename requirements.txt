@@ -3,3 +3,10 @@ numpy
 scikit-learn
 tensorflow
 PyYAML
+tensorflow
+numpy
+pandas
+scikit-learn
+matplotlib
+pyyaml
+notebook
