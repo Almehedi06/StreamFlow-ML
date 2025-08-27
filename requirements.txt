@@ -1,3 +1,8 @@
+pandas
+numpy
+scikit-learn
+tensorflow
+PyYAML
 tensorflow
 numpy
 pandas
